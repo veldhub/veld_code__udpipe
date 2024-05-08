@@ -1,0 +1,16 @@
+UDPipe 1
+========
+
+%!include: manual_about.t2t
+
+UDPipe website http://ufal.mff.cuni.cz/udpipe contains download links
+of both the released packages and trained models, hosts documentation and
+offers online web service.
+
+UDPipe development repository http://github.com/ufal/udpipe is hosted
+on GitHub.
+
+//Third-party contribution:// Instructions how to build UDPipe REST server as
+Docker image is here: http://github.com/samisalkosuo/udpipe-rest-server-docker.
+Instructions how to train UDPipe language models using a Docker image is also
+there.
