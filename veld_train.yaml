@@ -1,0 +1,13 @@
+
+services:
+  veld:
+    build: .
+    volumes:
+      - ./volumes/train/input/:/veld/input/
+      - ./volumes/train/output/:/veld/output/
+      - ./src/:/veld/executable/
+    environment:
+      train_data_path: "/veld/input/de_hdt-ud-train-a-1.conllu"
+      model_path: "/veld/output/de_hdt-ud-train-a-1.model"
+    command: /veld/executable/train.sh
+
