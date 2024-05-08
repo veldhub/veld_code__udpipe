@@ -1,0 +1,135 @@
+UDPipe 1
+Version 1.3.2-dev
+
+= Introduction =[introduction]
+
+%!include: manual_about.t2t
+
+
+= Online Web Application and Web Service =[online]
+
+%!include: manual_online.t2t
+
+
+= Release =[release]
+
+== Download ==[download]
+
+UDPipe releases are available on [GitHub http://github.com/ufal/udpipe], both as
+source code and as a pre-compiled binary package. The binary package contains Linux,
+Windows and OS X binaries, Java bindings binary, C# bindings binary, and source
+code of UDPipe and all language bindings). While the binary
+packages do not contain compiled Python or Perl bindings, packages for those
+languages are available in standard package repositories,
+i.e. on [PyPI https://pypi.python.org/pypi/ufal.udpipe/]
+and [CPAN https://metacpan.org/pod/Ufal::UDPipe].
+
+- [Latest release http://github.com/ufal/udpipe/releases/latest]
+- [All releases http://github.com/ufal/udpipe/releases], [Changelog https://github.com/ufal/udpipe/blob/master/CHANGES]
+
+
+You might also be interested in a contributed package
+[spacy-udpipe https://github.com/TakeLab/spacy-udpipe] which wraps UDPipe
+with spaCy API.
+
+=== Available Models ===[available_models]
+
+To use UDPipe, a model is needed. The models are available
+from [LINDAT/CLARIN http://www.lindat.cz] infrastructure and described further
+in the
+%web% [UDPipe Models /udpipe/1/models].
+%manual% [UDPipe Models #models].
+Currently, the following models are available:
+
+- Universal Dependencies 2.5 Models: [udpipe-ud2.5-191206 http://hdl.handle.net/11234/1-3131] ([documentation http://ufal.mff.cuni.cz/udpipe/1/models#universal_dependencies_25_models])
+- Universal Dependencies 2.4 Models: [udpipe-ud2.4-190531 http://hdl.handle.net/11234/1-2998] ([documentation http://ufal.mff.cuni.cz/udpipe/1/models#universal_dependencies_24_models])
+- Universal Dependencies 2.3 Models: [udpipe-ud2.3-181115 http://hdl.handle.net/11234/1-2898] ([documentation http://ufal.mff.cuni.cz/udpipe/1/models#universal_dependencies_23_models])
+- CoNLL18 Shared Task Baseline UD 2.2 Models: [udpipe-ud2.2-conll18-180430 http://hdl.handle.net/11234/1-2859] ([documentation http://ufal.mff.cuni.cz/udpipe/1/models#conll18_shared_task_baseline_ud_22_models])
+- Universal Dependencies 2.0 Models: [udpipe-ud2.0-170801 http://hdl.handle.net/11234/1-2364] ([documentation http://ufal.mff.cuni.cz/udpipe/1/models#universal_dependencies_20_models])
+- CoNLL17 Shared Task Baseline UD 2.0 Models: [udpipe-ud2.0-conll17-170315 http://hdl.handle.net/11234/1-1990] ([documentation http://ufal.mff.cuni.cz/udpipe/1/models#conll17_shared_task_baseline_ud_20_models])
+- Universal Dependencies 1.2 Models: [udpipe-ud1.2-160523 http://hdl.handle.net/11234/1-1659] ([documentation http://ufal.mff.cuni.cz/udpipe/1/models#universal_dependencies_12_models])
+
+
+== License ==[license]
+
+UDPipe is an open-source project and is freely available for non-commercial
+purposes. The library is distributed under
+[Mozilla Public License 2.0 http://www.mozilla.org/MPL/2.0/] and the associated models and data
+under [CC BY-NC-SA http://creativecommons.org/licenses/by-nc-sa/4.0/], although
+for some models the original data used to create the model may impose
+additional licensing conditions.
+
+If you use this tool for scientific work, please give credit to us by
+referencing [Straka et al. 2016 #bibtex_for_referencing] and the
+[UDPipe website http://ufal.mff.cuni.cz/udpipe].
+
+
+= UDPipe Installation =[installation]
+
+%web% [UDPipe Installation is available on a separate page. /udpipe/1/install]
+%manual% %!include: manual_install.t2t
+
+
+= UDPipe Models =[models]
+
+%web% [UDPipe Models are available on a separate page. /udpipe/1/models]
+%manual% %!include: manual_models.t2t
+
+
+= UDPipe User's Manual =[users_manual]
+
+%web% [UDPipe User's Manual is available on a separate page. /udpipe/1/users-manual]
+%manual% %!include: manual_user.t2t
+
+
+= UDPipe API Reference =[api_reference]
+
+%web% [UDPipe API Reference is available on a separate page. /udpipe/1/api-reference]
+%manual% %!include: manual_api_reference.t2t
+
+
+= Contact =[contact]
+
+Authors:
+- [Milan Straka http://ufal.mff.cuni.cz/milan-straka], straka@ufal.mff.cuni.cz
+
+
+[UDPipe website http://ufal.mff.cuni.cz/udpipe].
+
+[UDPipe LINDAT/CLARIN entry http://hdl.handle.net/11234/1-1702].
+
+
+= Acknowledgements =[udpipe_acknowledgements]
+
+This work has been using language resources developed and/or stored and/or distributed by the LINDAT/CLARIN project of the Ministry of Education of the Czech Republic (project //LM2010013//).
+
+%web% Acknowledgements for individual models are listed in the [UDPipe User's Manual page /udpipe/1/users-manual].
+%manual% Acknowledgements for individual models are listed in [UDPipe User's Manual #users_manual].
+
+
+== Publications ==[publications]
+
+- (Straka et al. 2017) Milan Straka and Jana Straková. //[Tokenizing, POS Tagging, Lemmatizing and Parsing UD 2.0 with UDPipe http://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf]//. In Proceedings of the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies, Vancouver, Canada, August 2017.
+- (Straka et al. 2016) Straka Milan, Hajič Jan, Straková Jana. //[UDPipe: Trainable Pipeline for Processing CoNLL-U Files Performing Tokenization, Morphological Analysis, POS Tagging and Parsing http://ufal.mff.cuni.cz/~straka/papers/2016-lrec_udpipe.pdf]//. In Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC 2016), Portorož, Slovenia, May 2016.
+-
+
+== Bibtex for Referencing ==[bibtex_for_referencing]
+
+```
+@InProceedings{udpipe:2017,
+  author    = {Straka, Milan  and  Strakov\'{a}, Jana},
+  title     = {Tokenizing, POS Tagging, Lemmatizing and Parsing UD 2.0 with UDPipe},
+  booktitle = {Proceedings of the CoNLL 2017 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies},
+  month     = {August},
+  year      = {2017},
+  address   = {Vancouver, Canada},
+  publisher = {Association for Computational Linguistics},
+  pages     = {88--99},
+  url       = {http://www.aclweb.org/anthology/K/K17/K17-3009.pdf}
+}
+```
+
+== Persistent Identifier ==[persistent_identifier]
+
+If you prefer to reference UDPipe by a persistent identifier (PID),
+you can use ``http://hdl.handle.net/11234/1-1702``.

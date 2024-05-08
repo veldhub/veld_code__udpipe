@@ -1,0 +1,6 @@
+DirectoryIndex run.php
+
+RewriteEngine on
+
+RewriteRule api$ http://127.0.0.1:8001/ [QSA,P,L]
+RewriteRule api/(.*)$ http://127.0.0.1:8001/$1 [QSA,P,L]

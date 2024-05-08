@@ -1,0 +1,4 @@
+UDPipe 1
+[![Compile Status](https://github.com/ufal/udpipe/actions/workflows/compile.yml/badge.svg)](https://github.com/ufal/udpipe/actions/workflows/compile.yml)
+
+%!include: readme.t2t
