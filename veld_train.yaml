@@ -1,3 +1,29 @@
+x-veld:
+  executable:
+
+    inputs:
+      volume: /veld/input/
+      type: "conllu"
+      content: 
+        - "tokenized text"
+        - "enriched text"
+        - "linguistic data"
+
+    outputs:
+      volume: /veld/output/
+      type: "udpipe model"
+      content:
+        - "NLP model"
+        - "tokenizer"
+        - "lemmatizer"
+
+    environment:
+      train_data_path:
+        path_prefix: "/veld/input/"
+        type: "conllu"
+      model_path:
+        path_prefix: "/veld/output/"
+        type: "udpipe model"
 
 services:
   veld:
@@ -7,7 +33,7 @@ services:
       - ./volumes/train/output/:/veld/output/
       - ./src/:/veld/executable/
     environment:
-      train_data_path: "/veld/input/de_hdt-ud-train-a-1.conllu"
-      model_path: "/veld/output/de_hdt-ud-train-a-1.model"
+      train_data_path: "/veld/input/<REPLACE>"
+      model_path: "/veld/output/<REPLACE>"
     command: /veld/executable/train.sh
 
