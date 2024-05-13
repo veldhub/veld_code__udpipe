@@ -46,6 +46,8 @@ read_input_options_multiple() {
           if [[ $2 == "true" ]]; then
             result+="${var_short}=0;"
           fi
+        else
+          result+="${var_short}=${var_value};"
         fi
       fi
     done
