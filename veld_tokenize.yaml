@@ -38,10 +38,10 @@ services:
       - ./volumes/tokenize/input/1/:/veld/input/1/ 
       - ./volumes/tokenize/input/2/:/veld/input/2/
       - ./volumes/tokenize/output/:/veld/output/
-      - ./src/:/veld/executable/
+      - ./src/main/:/veld/executable/
     environment:
       input_text_file_path: "/veld/input/1/<REPLACE>"
-      model_file_Path: "/veld/input/2/<REPLACE>"
+      model_path: "/veld/input/2/<REPLACE>"
       output_conllu_file_path: "/veld/output/<REPLACE>"
     command: /veld/executable/tokenize.sh
 
