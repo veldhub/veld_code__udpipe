@@ -6,9 +6,9 @@
 # function reading the basic boolean paramater, returning "--param" if true, empty if not
 read_input_options_simple() {
   if [[ "${!1}" == "true" ]]; then
-    echo " --${1}"
+    echo "--${1}"
   else
-    echo " "
+    echo ""
   fi
 }
 
@@ -20,7 +20,7 @@ read_input_options_multiple() {
 
   # first, read in simple main parameter
   base_option=$(read_input_options_simple "$1")
-  if [[ "$base_option" != " " ]]; then
+  if [[ "$base_option" != "" ]]; then
     result=""
 
     # iterate over all environment variables, check if they match the main parameter, but with a
@@ -55,7 +55,7 @@ read_input_options_multiple() {
     # return full parameter with sub parameters as one string
     echo "${base_option}=${result}"
   else
-    echo " "
+    echo ""
   fi
 }
 

@@ -6,7 +6,7 @@ build_args() {
   result=""
 
   param_tokenizer="$(read_input_options_multiple tokenizer false)"
-  if [[ "$param_tokenizer" != " " ]]; then
+  if [[ "$param_tokenizer" != "" ]]; then
     result+="--tokenize"
     if [[ "${param_tokenizer: -1}" != "=" ]]; then
       result+="$param_tokenizer"
@@ -14,7 +14,7 @@ build_args() {
   fi
 
   param_tagger="$(read_input_options_multiple tagger false)"
-  if [[ "$param_tagger" != " " ]]; then
+  if [[ "$param_tagger" != "" ]]; then
     result+=" --tag"
     if [[ "${param_tagger: -1}" != "=" ]]; then
       result+="$param_tagger"
@@ -22,7 +22,7 @@ build_args() {
   fi
 
   param_parser="$(read_input_options_multiple parser false)"
-  if [[ "$param_parser" != " " ]]; then
+  if [[ "$param_parser" != "" ]]; then
     result+=" --parse"
     if [[ "${param_parser: -1}" != "=" ]]; then
       result+="$param_parser"

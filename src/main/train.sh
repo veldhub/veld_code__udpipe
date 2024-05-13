@@ -4,8 +4,8 @@ source ./read_input_options.sh
 
 build_args() {
   result=""
-  result+="$(read_input_options_multiple tokenizer true)"
-  result+="$(read_input_options_multiple tagger true)"
+  result+="$(read_input_options_multiple tokenizer true) "
+  result+="$(read_input_options_multiple tagger true) "
   result+="$(read_input_options_multiple parser true)"
   echo "$result"
 }
