@@ -18,12 +18,244 @@ x-veld:
         - "lemmatizer"
 
     environment:
+
+      # input and output options
       train_data_path:
         path_prefix: "/veld/input/"
         type: "conllu"
       model_path:
         path_prefix: "/veld/output/"
         type: "udpipe model"
+
+      # tokenizer options (see https://ufal.mff.cuni.cz/udpipe/1/users-manual#model_training_tokenizer )
+      # TODO: check for more available options
+      tokenizer:
+        description: "if tokenizer config should be read or not"
+        type: boolean
+        optional: true
+        default: true
+      tokenizer_tokenize_url:
+        description: "tokenize URLs and emails using a manually implemented recognizer"
+        type: boolean
+        optional: true
+        default: true
+      tokenizer_allow_spaces:
+        description: "allow tokens to contain spaces"
+        type: boolean
+        optional: true
+        default: true # true if any token contains a space, false otherwise
+      tokenizer_dimension:
+        description: "dimension of character embeddings and of the per-character bidirectional GRU. Note that inference time is quadratic in this parameter. Supported values are only 16, 24 and 64, with 64 needed for languages with complicated tokenization like Japanese, Chinese or Vietnamese or complicated segmentation."
+        type: int
+        optional: true
+        default: 24
+      tokenizer_segment_size:
+        description: "length of character segment used to predict token and sentence breaks. Larger values like 200 are needed for languges with complicated segmentation"
+        type: int
+        optional: true
+        default: 50
+      tokenizer_epochs:
+        description: "the number of epochs to train the tokenizer for"
+        type: int
+        optional: true
+        default: 100
+      tokenizer_batch_size:
+        description: "batch size (number of segments) used during tokenizer training"
+        type: int
+        optional: true
+        default: 50
+      tokenizer_learning_rate:
+        description: "the learning rate used during tokenizer training"
+        type: float
+        optional: true
+        default: 0.005
+      tokenizer_learning_rate_final:
+        description: "if not zero, use exponential learning rate decay so that last epoch uses this learning rate"
+        type: float
+        optional: true
+        default: 0
+      tokenizer_dropout:
+        description: "dropout used during tokenizer training"
+        type: float
+        optional: true
+        default: 0.1
+      tokenizer_early_stopping:
+        description: "perform early stopping, choosing training iteration maximizing sentences F1 score plus tokens F1 score on heldout data"
+        type: boolean
+        optional: true
+        default: 1
+
+      # tagger options (see https://ufal.mff.cuni.cz/udpipe/1/users-manual#model_training_tagger )
+      # TODO: check for more available options
+      tagger:
+        description: "if tagger config should be read or not"
+        type: boolean
+        optional: true
+        default: true
+      tagger_use_lemma:
+        description: "use the lemma field internally to perform disambiguation; the lemma may be not outputted"
+        type: boolean
+        optional: true
+        default: true # default for the second model and also if there is only one model
+      tagger_provide_lemma:
+        description: "produce the disambiguated lemma on output"
+        type: boolean
+        optional: true
+        default: true # default for the second model and also if there is only one model
+      tagger_use_xpostag:
+        description: "use the XPOS tags internally to perform disambiguation; it may not be outputted"
+        type: boolean
+        optional: true
+        default: true # default for the first model
+      tagger_provide_xpostag:
+        description: "produce the disambiguated XPOS tag on output"
+        type: boolean
+        optional: true
+        default: true # default for the first model
+      tagger_use_feats:
+        description: "use the Feats internally to perform disambiguation; it may not be outputted"
+        type: boolean
+        optional: true
+        default: true # default for the first model
+      tagger_provide_feats: 
+        description: "produce the disambiguated Feats field on output"
+        type: boolean
+        optional: true
+        default: true # default for the first model
+      tagger_dictionary_max_form_analyses:
+        description: "the maximum number of (most frequent) form analyses from UD training data that are to be kept in the morphological dictionary"
+        type: int
+        optional: true
+        default: 0 # default 0 - unlimited
+      tagger_dictionary_file:
+        description: "use a given custom morphological dictionary, where each line contains 5 tab-separated fields FORM, LEMMA, UPOSTAG, XPOSTAG and FEATS. Note that this dictionary data is appended to the dictionary created from the UD training data, not replacing it."
+        type: "file"
+        optional: true
+        default: null
+      tagger_guesser_suffix_rules:
+        description: "number of rules generated for every suffix"
+        type: int
+        optional: true
+        default: 8
+      tagger_guesser_prefixes_max:
+        description: "maximum number of form-generating prefixes to use in the guesser"
+        type: int
+        optional: true
+        default: 4 # default 4 if `provide_lemma`, 0 otherwise
+      tagger_guesser_prefix_min_count:
+        description: "minimum number of occurrences of form-generating prefix to consider using it in the guesser"
+        type: int
+        optional: true
+        default: 10
+      tagger_guesser_enrich_dictionary:
+        description: "number of rules generated for forms present in training data (assuming that the analyses from the training data may not be all)"
+        type: int
+        optional: true
+        default: 6 # default 6 if no dictionary_file is passed, 0 otherwise
+      tagger_iterations:
+        description: "number of training iterations to perform"
+        type: int
+        optional: true
+        default: 20
+      tagger_early_stopping:
+        description: "perform early stopping, choosing training iteration maximizing tagging accuracy on the heldout data"
+        type: boolean
+        optional: true
+        default: 0 # default 1 if heldout is given, 0 otherwise
+      tagger_templates:
+        description: "MorphoDiTa feature templates to use, either lemmatizer which focuses more on lemmas, or tagger which focuses more on UPOS/XPOS/FEATS"
+        type: "file"
+        optional: true
+        default: null # default lemmatizer for second model, tagger otherwise
+
+      # parser options (see https://ufal.mff.cuni.cz/udpipe/1/users-manual#model_training_parser )
+      # TODO: check for more available options
+      parser:
+        description: "if parser config should be read or not"
+        type: boolean
+        optional: true
+        default: true
+      parser_use_gold_tags:
+        description: "if false and a tagger exists, the Lemmas/UPOS/XPOS/FEATS for both the training and heldout data are generated by the tagger, otherwise they are taken from the gold data"
+        type: boolean
+        optional: true
+        default: false
+      parser_embedding_upostag:
+        description: "the dimension of the UPos embedding used in the parser"
+        type: int
+        optional: true
+        default: 20
+      parser_embedding_feats:
+        description: "the dimension of the Feats embedding used in the parser"
+        type: int
+        optional: true
+        default: 20
+      parser_embedding_xpostag:
+        description: "the dimension of the XPos embedding used in the parser"
+        type: int
+        optional: true
+        default: 0
+      parser_embedding_form:
+        description: "the dimension of the Form embedding used in the parser"
+        type: int
+        optional: true
+        default: 50
+      parser_embedding_lemma:
+        description: "the dimension of the Lemma embedding used in the parser"
+        type: int
+        optional: true
+        default: 0
+      parser_embedding_deprel:
+        description: "the dimension of the Deprel embedding used in the parser"
+        type: int
+        optional: true
+        default: 20
+      parser_embedding_form_mincount:
+        description: "for forms not present in the pre-trained embeddings, generate random embeddings if the form appears at least this number of times in the trainig data (forms not present in the pre-trained embeddings and appearing less number of times are considered OOV)"
+        type: int
+        optional: true
+        default: 2
+      parser_embedding_lemma_mincount:
+        description: "for lemmas not present in the pre-trained embeddings, generate random embeddings if the lemma appears at least this number of times in the trainig data (lemmas not present in the pre-trained embeddings and appearing less number of times are considered OOV)"
+        type: int
+        optional: true
+        default: 2
+      parser_iterations:
+        description: "number of training iterations to use"
+        type: int
+        optional: true
+        default: 10
+      parser_hidden_layer:
+        description: "the size of the hidden layer"
+        type: int
+        optional: true
+        default: 200
+      parser_batch_size:
+        description: "batch size used during neural-network training"
+        type: int
+        optional: true
+        default: 10
+      parser_learning_rate:
+        description: "the learning rate used during neural-network training"
+        type: float
+        optional: true
+        default: 0.02
+      parser_learning_rate_final:
+        description: "the final learning rate used during neural-network training"
+        type: float
+        optional: true
+        default: 0.001
+      parser_l2:
+        description: "the L2 regularization used during neural-network training"
+        type: float
+        optional: true
+        default: 0.5
+      parser_early_stopping:
+        description: "perform early stopping, choosing training iteration maximizing LAS on heldout data"
+        type: boolean
+        optional: true
+        default: false # default 1 if heldout is given, 0 otherwise
+      
 
 services:
   veld:

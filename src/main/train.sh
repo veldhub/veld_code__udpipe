@@ -4,14 +4,13 @@ source ./read_input_options.sh
 
 build_args() {
   result=""
-  result+="$(read_input_options_multiple tokenizer)"
-  result+="$(read_input_options_multiple tagger)"
-  result+="$(read_input_options_multiple parser)"
-  echo $result
+  result+="$(read_input_options_multiple tokenizer true)"
+  result+="$(read_input_options_multiple tagger true)"
+  result+="$(read_input_options_multiple parser true)"
+  echo "$result"
 }
 
 udpipe_args=$(build_args)
-echo "arguments constructed from environment input: ${udpipe_args}"
-
-udpipe --train $udpipe_args $model_path $train_data_path
-
+command="udpipe --train ${udpipe_args} ${model_path} ${train_data_path}"
+echo "constructed command: ${command}"
+$command
