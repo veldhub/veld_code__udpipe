@@ -3,7 +3,7 @@ x-veld:
 
     inputs:
       - volume: /veld/input/1/
-        input: "txt"
+        type: "txt"
         content: "natural text"
       - volume: /veld/input/2/
         type: "udpipe model"
