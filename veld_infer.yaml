@@ -23,13 +23,13 @@ x-veld:
     environment:
 
       # input and output options
-      input_text_file_path:
+      in_txt_path:
         path_prefix: "/veld/input/1/"
         type: "txt"
-      model_path: 
+      in_model_path: 
         path_prefix: "/veld/input/2/"
         type: "udpipe model"
-      output_conllu_file_path:
+      out_conllu_path: 
         path_prefix: "/veld/output/"
         type: "conllu"
 
