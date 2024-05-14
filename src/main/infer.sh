@@ -2,6 +2,16 @@
 
 source ./read_input_options.sh
 
+if [[ "$in_txt_url" != "" ]]; then
+  if [[ "$in_txt_path" != "" ]]; then
+    echo "both in_txt_url and in_txt_path are provided. Exiting. Define only one." 
+    exit 1
+  fi
+  echo "downloading txt from ${in_txt_url}"
+  curl -o /tmp/tmp.txt "$in_txt_url"
+  in_txt_path=/tmp/tmp.txt
+fi
+
 build_args() {
   result=""
 
