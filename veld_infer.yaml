@@ -26,7 +26,7 @@ x-veld:
       input_text_file_path:
         path_prefix: "/veld/input/1/"
         type: "txt"
-      model_file_Path: 
+      model_path: 
         path_prefix: "/veld/input/2/"
         type: "udpipe model"
       output_conllu_file_path:
@@ -97,5 +97,5 @@ services:
       tokenizer: true
       tagger: true
       parser: true
-    command: /veld/executable/tokenize.sh
+    command: /veld/executable/infer.sh
 
