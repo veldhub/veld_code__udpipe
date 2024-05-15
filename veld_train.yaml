@@ -1,5 +1,6 @@
 x-veld:
   executable:
+    description: "udpipe training setup"
 
     inputs:
       volume: /veld/input/
