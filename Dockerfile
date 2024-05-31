@@ -10,5 +10,4 @@ WORKDIR /opt/udpipe/
 RUN make 
 RUN ln -s /opt/udpipe/udpipe /usr/local/bin/udpipe
 WORKDIR /veld/executable/
-RUN useradd -u 1000 docker_user
-USER docker_user
+
