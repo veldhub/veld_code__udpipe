@@ -84,7 +84,7 @@ x-veld:
         default: true
 
 services:
-  veld:
+  veld_infer:
     build: .
     volumes:
       - ./volumes/tokenize/input/1/:/veld/input/1/ 

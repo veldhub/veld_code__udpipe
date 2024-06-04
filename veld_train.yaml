@@ -259,7 +259,7 @@ x-veld:
       
 
 services:
-  veld:
+  veld_train:
     build: .
     volumes:
       - ./volumes/train/input/:/veld/input/
