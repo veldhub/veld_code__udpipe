@@ -1,5 +1,5 @@
 x-veld:
-  executable:
+  code:
     description: "udpipe training setup"
 
     inputs:
@@ -264,9 +264,9 @@ services:
     volumes:
       - ./volumes/train/input/:/veld/input/
       - ./volumes/train/output/:/veld/output/
-      - ./src/main/:/veld/executable/
+      - ./src/main/:/veld/code/
     environment:
       train_data_path: "/veld/input/<REPLACE>"
       model_path: "/veld/output/<REPLACE>"
-    command: /veld/executable/train.sh
+    command: /veld/code/train.sh
 

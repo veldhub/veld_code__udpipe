@@ -1,5 +1,5 @@
 x-veld:
-  executable:
+  code:
     description: "udpipe inference setup"
 
     inputs:
@@ -90,7 +90,7 @@ services:
       - ./volumes/tokenize/input/1/:/veld/input/1/ 
       - ./volumes/tokenize/input/2/:/veld/input/2/
       - ./volumes/tokenize/output/:/veld/output/
-      - ./src/main/:/veld/executable/
+      - ./src/main/:/veld/code/
     environment:
       input_text_file_path: "/veld/input/1/<REPLACE>"
       model_path: "/veld/input/2/<REPLACE>"
@@ -98,5 +98,5 @@ services:
       tokenizer: true
       tagger: true
       parser: true
-    command: /veld/executable/infer.sh
+    command: /veld/code/infer.sh
 
