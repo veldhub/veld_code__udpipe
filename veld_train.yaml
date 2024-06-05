@@ -1,11 +1,21 @@
 x-veld:
   code:
-    description: "udpipe training setup"
+    about:
+      description: "udpipe training setup"
+      topcis:
+        - "NLP"
+        - "Machine learning"
+        - "tokenization"
+        - "lemmatization"
+        - "part of speech"
+        - "dependency parsing"
+        - "universal dependencies"
+        - "grammatical annotation"
 
     inputs:
       volume: /veld/input/
       type: "conllu"
-      content: 
+      contents: 
         - "tokenized text"
         - "enriched text"
         - "linguistic data"
@@ -13,7 +23,7 @@ x-veld:
     outputs:
       volume: /veld/output/
       type: "udpipe model"
-      content:
+      contents:
         - "NLP model"
         - "tokenizer"
         - "lemmatizer"
@@ -130,7 +140,7 @@ x-veld:
         default: 0 # default 0 - unlimited
       tagger_dictionary_file:
         description: "use a given custom morphological dictionary, where each line contains 5 tab-separated fields FORM, LEMMA, UPOSTAG, XPOSTAG and FEATS. Note that this dictionary data is appended to the dictionary created from the UD training data, not replacing it."
-        type: "file"
+        type: file
         optional: true
         default: null
       tagger_guesser_suffix_rules:
@@ -165,7 +175,7 @@ x-veld:
         default: 0 # default 1 if heldout is given, 0 otherwise
       tagger_templates:
         description: "MorphoDiTa feature templates to use, either lemmatizer which focuses more on lemmas, or tagger which focuses more on UPOS/XPOS/FEATS"
-        type: "file"
+        type: file
         optional: true
         default: null # default lemmatizer for second model, tagger otherwise
 
@@ -261,12 +271,56 @@ x-veld:
 services:
   veld_train:
     build: .
+    command: /veld/code/train.sh
     volumes:
       - ./volumes/train/input/:/veld/input/
       - ./volumes/train/output/:/veld/output/
       - ./src/main/:/veld/code/
     environment:
-      train_data_path: "/veld/input/<REPLACE>"
-      model_path: "/veld/output/<REPLACE>"
-    command: /veld/code/train.sh
+      train_data_path: null
+      model_path: null
+      tokenizer: true
+      tokenizer_tokenize_url: true
+      tokenizer_allow_spaces: null
+      tokenizer_dimension: 24
+      tokenizer_segment_size: 50
+      tokenizer_epochs: 100
+      tokenizer_batch_size: 50
+      tokenizer_learning_rate: 0.005
+      tokenizer_learning_rate_final: 0
+      tokenizer_dropout: 0.1
+      tokenizer_early_stopping: 1
+      tagger: true
+      tagger_use_lemma: true
+      tagger_provide_lemma: null
+      tagger_use_xpostag: null
+      tagger_provide_xpostag: null
+      tagger_use_feats: null
+      tagger_provide_feats:  null
+      tagger_dictionary_max_form_analyses: 0
+      tagger_dictionary_file: null
+      tagger_guesser_suffix_rules: 8
+      tagger_guesser_prefixes_max: 4
+      tagger_guesser_prefix_min_count: 10
+      tagger_guesser_enrich_dictionary: 6
+      tagger_iterations: 20
+      tagger_early_stopping: 0
+      tagger_templates: null
+      parser: true
+      parser_use_gold_tags: null
+      parser_embedding_upostag: 20
+      parser_embedding_feats: 20
+      parser_embedding_xpostag: 0
+      parser_embedding_form: 50
+      parser_embedding_lemma: 0
+      parser_embedding_deprel: 20
+      parser_embedding_form_mincount: 2
+      parser_embedding_lemma_mincount: 2
+      parser_iterations: 10
+      parser_hidden_layer: 200
+      parser_batch_size: 10
+      parser_learning_rate: 0.02
+      parser_learning_rate_final: 0.001
+      parser_l2: 0.5
+      parser_early_stopping: null
 

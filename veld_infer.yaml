@@ -1,38 +1,54 @@
 x-veld:
   code:
-    description: "udpipe inference setup"
+    about:
+      description: "udpipe inference setup"
+      topics: 
+        - "NLP"
+        - "Machine learning"
+        - "tokenization"
+        - "lemmatization"
+        - "part of speech"
+        - "dependency parsing"
+        - "universal dependencies"
+        - "grammatical annotation"
 
     inputs:
       - volume: /veld/input/1/
-        type: "txt"
-        content: "natural text"
+        file_formats: "txt"
+        contents: "natural text"
       - volume: /veld/input/2/
-        type: "udpipe model"
-        content:
+        file_formats: "udpipe model"
+        contents:
           - "NLP model"
           - "tokenizer"
           - "lemmatizer"
 
     outputs:
       volume: /veld/output/
-      type: "conllu"
-      content: 
+      file_formats:
+        - "conllu"
+        - "tsv"
+      contents: 
         - "tokenized text"
-        - "enriched text"
+        - "lemmatized text"
+        - "part of speech of text"
+        - "universal dependencies of text"
+        - "grammatically annotated text"
         - "linguistic data"
 
     environment:
 
       # input and output options
       in_txt_path:
+        type: path
         path_prefix: "/veld/input/1/"
-        type: "txt"
       in_model_path: 
+        type: path
         path_prefix: "/veld/input/2/"
-        type: "udpipe model"
+        type: "txt"
       out_conllu_path: 
+        type: path
         path_prefix: "/veld/output/"
-        type: "conllu"
 
       # tokenizer options (see https://ufal.mff.cuni.cz/udpipe/1/users-manual#run_udpipe_tokenizer )
       # TODO: check for more available options
@@ -86,17 +102,21 @@ x-veld:
 services:
   veld_infer:
     build: .
+    command: /veld/code/infer.sh
     volumes:
       - ./volumes/tokenize/input/1/:/veld/input/1/ 
       - ./volumes/tokenize/input/2/:/veld/input/2/
       - ./volumes/tokenize/output/:/veld/output/
       - ./src/main/:/veld/code/
     environment:
-      input_text_file_path: "/veld/input/1/<REPLACE>"
-      model_path: "/veld/input/2/<REPLACE>"
-      output_conllu_file_path: "/veld/output/<REPLACE>"
+      in_txt_path: null
+      in_model_path: null
+      out_conllu_path: null
       tokenizer: true
+      tokenizer_normalized_spaces: false
+      tokenizer_presegmented: false
+      tokenizer_ranges: false
+      tokenizer_joint_with_parsing: false
+      tokenizer_joint_change_boundary_logprob: false
       tagger: true
       parser: true
-    command: /veld/code/infer.sh
-
