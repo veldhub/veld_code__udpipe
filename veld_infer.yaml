@@ -45,7 +45,6 @@ x-veld:
       in_model_path: 
         type: path
         path_prefix: "/veld/input/2/"
-        type: "txt"
       out_conllu_path: 
         type: path
         path_prefix: "/veld/output/"
