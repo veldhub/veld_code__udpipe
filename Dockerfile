@@ -9,5 +9,5 @@ COPY ./src/udpipe/src/ /opt/udpipe/
 WORKDIR /opt/udpipe/
 RUN make 
 RUN ln -s /opt/udpipe/udpipe /usr/local/bin/udpipe
-WORKDIR /veld/executable/
+WORKDIR /veld/code/
 
