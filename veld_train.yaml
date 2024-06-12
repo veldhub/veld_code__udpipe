@@ -275,7 +275,7 @@ services:
     volumes:
       - ./volumes/train/input/:/veld/input/
       - ./volumes/train/output/:/veld/output/
-      - ./src/main/:/veld/code/
+      #- ./src/main/:/veld/code/
     environment:
       train_data_path: null
       model_path: null
