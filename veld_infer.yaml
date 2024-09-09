@@ -29,6 +29,7 @@ x-veld:
         - "conllu"
         - "tsv"
       contents: 
+        - "inferenced NLP data"
         - "tokenized text"
         - "lemmatized text"
         - "part of speech of text"
