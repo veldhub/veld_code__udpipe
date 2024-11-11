@@ -24,7 +24,7 @@ x-veld:
       - volume: /veld/output/
         environment: model_path
         file_type: "udpipe model"
-        contents: ""
+        contents:
           - "NLP model"
           - "tokenizer"
           - "lemmatizer"
