@@ -1,11 +1,9 @@
-FROM debian:latest
+FROM debian:stable-20241111-slim
 RUN apt-get update
 RUN apt-get -y install \
-#  gcc \
-#  gcc-aarch64-linux-gnu \
-  clang \
-  build-essential \
-  curl
+  clang=1:14.0* \
+  build-essential=12.9* \
+  curl=7.88*
 COPY ./src/udpipe/src/ /opt/udpipe/
 WORKDIR /opt/udpipe/
 RUN make 
