@@ -12,6 +12,16 @@ if [[ "$in_txt_url" != "" ]]; then
   in_txt_path=/tmp/tmp.txt
 fi
 
+if [[ "$in_model_url" != "" ]]; then
+  if [[ "$in_model_path" != "" ]]; then
+    echo "both in_model_url and in_model_path are provided. Exiting. Define only one." 
+    exit 1
+  fi
+  echo "downloading model from ${in_model_url}"
+  curl -o /tmp/tmp.udpipe "$in_model_url"
+  in_model_path=/tmp/tmp.udpipe
+fi
+
 build_args() {
   result=""
 

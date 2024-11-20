@@ -99,6 +99,7 @@ services:
     environment:
       in_txt_path: null
       in_model_path: null
+      in_model_url: null
       out_conllu_path: null
       tokenizer: true
       tokenizer_normalized_spaces: false
