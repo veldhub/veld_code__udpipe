@@ -19,7 +19,6 @@ x-veld:
       - volume: /veld/input/2/
         environment: in_model_path
         file_type: "udpipe model"
-        contents: "natural text"
         contents:
           - "NLP model"
           - "tokenizer"
