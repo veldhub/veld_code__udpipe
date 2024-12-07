@@ -11,6 +11,6 @@ build_args() {
 }
 
 udpipe_args=$(build_args)
-command="udpipe --train ${udpipe_args} ${model_path} ${train_data_path}"
+command="udpipe --train ${udpipe_args} /veld/output/${model_path} /veld/input/${train_data_path}"
 echo "constructed command: ${command}"
 $command
