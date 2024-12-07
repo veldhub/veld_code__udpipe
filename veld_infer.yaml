@@ -12,12 +12,14 @@ x-veld:
       - "grammatical annotation"
 
     inputs:
-      - volume: /veld/input/1/
-        environment: in_txt_path
+      - volume: /veld/input/txt/
+        environment: in_txt_file
+        description: "txt files to be inferenced on. Note that the environment var `in_txt_file` is
+          optional, and if it is not present, the entire input folder will be processed recursively"
         file_type: "txt"
         contents: "natural text"
-      - volume: /veld/input/2/
-        environment: in_model_path
+      - volume: /veld/input/model/
+        environment: in_model_file
         file_type: "udpipe model"
         contents:
           - "NLP model"
@@ -26,7 +28,8 @@ x-veld:
 
     outputs:
       - volume: /veld/output/
-        environment: out_conllu_path
+        description: "The file name of the output conllu is created by the corresponding input txt
+          file, since recursive processing requires such automatic logic"
         file_type:
           - "conllu"
           - "tsv"
@@ -91,15 +94,13 @@ services:
     build: .
     command: /veld/code/infer.sh
     volumes:
-      - ./data/tokenize/input/1/:/veld/input/1/
-      - ./data/tokenize/input/2/:/veld/input/2/
-      - ./data/tokenize/output/:/veld/output/
+      - ./data/inference/input/txt/:/veld/input/txt/
+      - ./data/inference/input/model/:/veld/input/model/
+      - ./data/inference/output/:/veld/output/
       - ./src/main/:/veld/code/
     environment:
-      in_txt_path: null
-      in_model_path: null
-      in_model_url: null
-      out_conllu_path: null
+      in_txt_file: null
+      in_model_file: null
       tokenizer: true
       tokenizer_normalized_spaces: false
       tokenizer_presegmented: false

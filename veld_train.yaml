@@ -262,8 +262,8 @@ services:
     build: .
     command: /veld/code/train.sh
     volumes:
-      - ./data/train/input/:/veld/input/
-      - ./data/train/output/:/veld/output/
+      - ./data/training/input/:/veld/input/
+      - ./data/training/output/:/veld/output/
       - ./src/main/:/veld/code/
     environment:
       train_data_path: null
