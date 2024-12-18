@@ -17,7 +17,7 @@ x-veld:
         description: "txt files to be inferenced on. Note that the environment var `in_txt_file` is
           optional, and if it is not present, the entire input folder will be processed recursively"
         file_type: "txt"
-        content: "natural text"
+        content: "raw text"
       - volume: /veld/input/model/
         environment_var: in_model_file
         file_type: "udpipe model"
