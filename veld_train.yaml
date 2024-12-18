@@ -130,7 +130,7 @@ x-veld:
         default: 0 # default 0 - unlimited
       - environment: tagger_dictionary_file
         description: "use a given custom morphological dictionary, where each line contains 5 tab-separated fields FORM, LEMMA, UPOSTAG, XPOSTAG and FEATS. Note that this dictionary data is appended to the dictionary created from the UD training data, not replacing it."
-        env_type: file
+        env_type: str
         optional: true
         default: null
       - environment: tagger_guesser_suffix_rules
@@ -165,7 +165,7 @@ x-veld:
         default: 0 # default 1 if heldout is given, 0 otherwise
       - environment: tagger_templates
         description: "MorphoDiTa feature templates to use, either lemmatizer which focuses more on lemmas, or tagger which focuses more on UPOS/XPOS/FEATS"
-        env_type: file
+        env_type: str
         optional: true
         default: null # default lemmatizer for second model, tagger otherwise
 
