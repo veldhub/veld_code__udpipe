@@ -16,6 +16,7 @@ x-veld:
         environment_var: in_txt_file
         description: "txt files to be inferenced on. Note that the environment var `in_txt_file` is
           optional, and if it is not present, the entire input folder will be processed recursively"
+        optional: true
         file_type: "txt"
         content: "raw text"
       - volume: /veld/input/model/
