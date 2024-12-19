@@ -165,7 +165,7 @@ x-veld:
         default: 0 # default 1 if heldout is given, 0 otherwise
       - environment_var: tagger_templates
         description: "MorphoDiTa feature templates to use, either lemmatizer which focuses more on lemmas, or tagger which focuses more on UPOS/XPOS/FEATS"
-        var_type: bool
+        var_type: str
         optional: true
         default: null # default lemmatizer for second model, tagger otherwise
 
