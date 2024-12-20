@@ -1,9 +1,6 @@
-FROM debian:stable-20241111-slim
+FROM --platform=linux/amd64 debian:stable-20241111-slim
 RUN apt-get update
-RUN apt-get -y install \
-  clang=1:14.0* \
-  build-essential=12.9* \
-  curl=7.88*
+RUN apt-get -y install build-essential=12.9*
 COPY ./src/udpipe/src/ /opt/udpipe/
 WORKDIR /opt/udpipe/
 RUN make 
