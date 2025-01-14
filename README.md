@@ -1,32 +1,40 @@
 # veld_code__udpipe
 
-Code VELD repo to encapsulate [updipe](https://lindat.mff.cuni.cz/services/udpipe/). 
-
-Offers currently two code velds:
-
-- [./veld_infer.yaml](./veld_infer.yaml): inference on txt data with a given udpipe model
-- [./veld_train.yaml](./veld_train.yaml): train a udpipe model from scratch on conllu data
-
-See the respective VELD yaml files for more details.
+This repo contains [code velds](https://zenodo.org/records/13322913) encapsulating
+[updipe](https://lindat.mff.cuni.cz/services/udpipe/) .
 
 ## requirements
 
 - git
-- docker compose
+- docker compose (note: older docker compose versions require running `docker-compose` instead of 
+  `docker compose`)
 
-## how to run
+## how to use
 
-Either integrate a code veld into a chain veld, or use the code veld directly by adapting its 
-configuration with its veld yaml file. 
+A code veld may be integrated into a chain veld, or used directly by adapting the configuration 
+within its yaml file and using the template folders provided in this repo. Open the respective veld 
+yaml file for more information.
 
 Run a veld with:
 ```
-docker compsoe -f <veld>.yaml up
+docker compose -f <VELD_NAME>.yaml up
 ```
 
-e.g. 
+## contained code velds
+
+**[./veld_train.yaml](./veld_train.yaml)** 
+
+udpipe training
 
 ```
 docker compsoe -f veld_train.yaml up
+```
+
+**[./veld_infer.yaml](./veld_infer.yaml)** 
+
+udpipe inference
+
+```
+docker compsoe -f veld_infer.yaml up
 ```
 
