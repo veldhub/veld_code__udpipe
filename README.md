@@ -1,4 +1,4 @@
-# veld_code__udpipe
+# ![veld chain](https://raw.githubusercontent.com/veldhub/.github/refs/heads/main/images/symbol_V_letter.png) veld_code__udpipe
 
 This repo contains [code velds](https://zenodo.org/records/13322913) encapsulating
 [updipe](https://lindat.mff.cuni.cz/services/udpipe/) .
