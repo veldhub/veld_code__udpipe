@@ -93,7 +93,9 @@ x-veld:
 
 services:
   veld_infer:
-    build: .
+    build:
+      context: .
+      dockerfile: udpipe_1.dockerfile
     command: bash /veld/code/infer.sh
     volumes:
       - ./data/inference/input/txt/:/veld/input/txt/

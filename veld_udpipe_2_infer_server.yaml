@@ -1,0 +1,15 @@
+x-veld:
+  code:
+
+services:
+  veld_infer:
+    build: 
+      context: .
+      dockerfile: udpipe_2.dockerfile
+    #command: bash /veld/code/infer.sh
+    ports:
+      - 8001:8001
+    volumes:
+      - ./data/inference/input/txt/:/veld/input/txt/
+      - ./data/inference/input/model/:/veld/input/model/
+      - ./data/inference/output/:/veld/output/
