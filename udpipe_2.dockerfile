@@ -5,5 +5,5 @@ WORKDIR /tmp/
 RUN pip install -r requirements.txt
 RUN pip install -r requirements2.txt
 EXPOSE 8001
-WORKDIR /veld/code/udpipe/
+WORKDIR /veld/code/
 

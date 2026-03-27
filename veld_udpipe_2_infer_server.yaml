@@ -6,10 +6,12 @@ services:
     build: 
       context: .
       dockerfile: udpipe_2.dockerfile
-    #command: bash /veld/code/infer.sh
+    command: python3 udpipe2_server.py 8001 --concurrent 1 german german-hdt-ud-2.10-220711 /veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/ de_hdt https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_210_models
     ports:
       - 8001:8001
     volumes:
       - ./data/inference/input/txt/:/veld/input/txt/
       - ./data/inference/input/model/:/veld/input/model/
       - ./data/inference/output/:/veld/output/
+      - ./src/udpipe_2/:/veld/code/
+
