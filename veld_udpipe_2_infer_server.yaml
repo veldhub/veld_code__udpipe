@@ -2,7 +2,7 @@ x-veld:
   code:
 
 services:
-  veld_infer:
+  veld_udpipe_2_infer_server:
     build: 
       context: .
       dockerfile: udpipe_2.dockerfile

@@ -92,7 +92,7 @@ x-veld:
         default: true
 
 services:
-  veld_infer:
+  veld_udpipe_1_infer:
     build:
       context: .
       dockerfile: udpipe_1.dockerfile

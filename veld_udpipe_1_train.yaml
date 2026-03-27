@@ -259,7 +259,7 @@ x-veld:
       
 
 services:
-  veld_train:
+  veld_udpipe_1_train:
     build: .
     command: bash /veld/code/train.sh
     volumes:
