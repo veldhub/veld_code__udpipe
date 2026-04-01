@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: udpipe_2.dockerfile
-    command: python udpipe2_direct.py /veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/ de_hdt
+    command: python -u udpipe2_direct.py /veld/input/model/de_hdt-ud-2.10-220711.model/ de_hdt
     volumes:
       - ./data/inference/input/txt/:/veld/input/txt/
       - ./data/inference/input/model/:/veld/input/model/
