@@ -261,7 +261,7 @@ x-veld:
 services:
   veld_udpipe_1_train:
     build: .
-    command: bash /veld/code/train.sh
+    command: bash /veld/code/udpipe_1_train.sh
     volumes:
       - ./data/training/input/:/veld/input/
       - ./data/training/output/:/veld/output/

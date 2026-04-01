@@ -96,7 +96,7 @@ services:
     build:
       context: .
       dockerfile: udpipe_1.dockerfile
-    command: bash /veld/code/infer.sh
+    command: bash /veld/code/udpipe_1_infer.sh
     volumes:
       - ./data/inference/input/txt/:/veld/input/txt/
       - ./data/inference/input/model/:/veld/input/model/
