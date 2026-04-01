@@ -21,6 +21,7 @@ import threading
 import time
 import unicodedata
 import urllib.parse
+import tensorflow as tf
 
 import udpipe2
 import udpipe2_dataset
@@ -30,8 +31,10 @@ import wembedding_service.wembeddings.wembeddings as wembeddings
 __version__ = "2.1.1-dev"
 
 
-import tensorflow as tf
-print(tf.config.list_physical_devices('GPU'))
+if tf.config.list_physical_devices('GPU') != []:
+    print("GPU accessible")
+else:
+    print("GPU not accessible")
 
 
 class TooLongError(Exception):
