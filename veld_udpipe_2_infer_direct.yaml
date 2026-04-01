@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: udpipe_2.dockerfile
-    command: python3 udpipe2_direct.py german german-hdt-ud-2.10-220711 /veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/ de_hdt https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_210_models
+    command: python udpipe2_direct.py /veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/ de_hdt
     volumes:
       - ./data/inference/input/txt/:/veld/input/txt/
       - ./data/inference/input/model/:/veld/input/model/
