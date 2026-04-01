@@ -6,7 +6,8 @@ services:
     build: 
       context: .
       dockerfile: udpipe_2.dockerfile
-    command: python3 udpipe2_server.py 8001 --concurrent 1 german german-hdt-ud-2.10-220711 /veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/ de_hdt https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_210_models
+    command: python -u udpipe2_server.py 8001 --concurrent 1 german german-hdt-ud-2.10-220711 /veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/ de_hdt https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_210_models
+    # from client: python udpipe2_client.py /veld/input/txt/BAUERNZT_20251204.vert --service http://localhost:8001 --input vertical --tagger yes --parser yes --outfile /veld/output/BAUERNZT_20251204.vert
     ports:
       - 8001:8001
     volumes:
@@ -14,4 +15,13 @@ services:
       - ./data/inference/input/model/:/veld/input/model/
       - ./data/inference/output/:/veld/output/
       - ./src/udpipe_2/:/veld/code/
+      - ./data/cache/nv/:/root/.nv/ComputeCache
+      - ./data/cache/hf/:/root/.cache/huggingface/
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: all
+    #          capabilities: [gpu]
 
