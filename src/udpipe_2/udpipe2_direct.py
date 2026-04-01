@@ -91,9 +91,7 @@ class Models:
             if self._conllu_output is None:
                 raise RuntimeError("Cannot create CoNLL-U output format")
 
-            # Load the network if requested
-            if names[0] in server_args.preload_models or "all" in server_args.preload_models:
-                self._network.load()
+            self._network.load()
 
         def read(self, text, input_format):
             reader = ufal.udpipe.InputFormat.newInputFormat(input_format)
@@ -181,7 +179,6 @@ class Models:
             return "".join(output)
 
     def __init__(self, server_args):
-        self.default_model = server_args.default_model
         self.models_list = []
         self.models_by_names = {}
         networks_by_path = {}
@@ -197,9 +194,6 @@ class Models:
             self.models_list.append(self.Model(names, path, networks_by_path[path], variant, acknowledgements, server_args))
             for name in names:
                 self.models_by_names.setdefault(name, self.models_list[-1])
-
-        # Check the default model exists
-        assert self.default_model in self.models_by_names
 
 
 class UDServer(socketserver.ThreadingTCPServer):
@@ -401,15 +395,10 @@ class UDServer(socketserver.ThreadingTCPServer):
 
 
 if __name__ == "__main__":
-    import signal
-    import threading
-
-    # Parse server arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("default_model", type=str, help="Default model")
-    parser.add_argument("models", type=str, nargs="+", help="Models to serve")
+    parser.add_argument("model", type=str, help="Model to serve")
+    parser.add_argument("variant", type=str, help="Variant to serve")
     parser.add_argument("--batch_size", default=32, type=int, help="Batch size")
-    parser.add_argument("--preload_models", default=[], nargs="*", type=str, help="Models to preload, or `all`")
     parser.add_argument("--threads", default=0, type=int, help="Threads to use")
     parser.add_argument("--wembedding_preload_models", default=[], nargs="*", type=str, help="WEmbedding models to preload")
     parser.add_argument("--wembedding_server", default=None, type=str, help="Address of an WEmbedding server")
@@ -423,25 +412,20 @@ if __name__ == "__main__":
 
     args.optional_semaphore = threading.Semaphore(1)
     
-    path = "/veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/"
-    network = Models.Model.Network(path, args)
-    print(network)
+    network = Models.Model.Network(args.model, args)
     m = Models.Model(
-        names=[path],
-        path=path,
+        names=[args.model],
+        path=args.model,
         network=network,
-        variant="de_hdt",
+        variant=args.variant,
         acknowledgements="https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_210_models",
         server_args=args
     )
-    print(m)
     with open("/veld/input/txt/test_203_for_udpipe.vert", "r") as f:
         data = f.read()
-    for i in range(10):
-        print(f"iteration {i}")
-        sentences = m.read(data, "vertical")
-        writer = ufal.udpipe.OutputFormat.newOutputFormat("conllu")
-        output = m.predict(sentences, True, True, writer)
+    sentences = m.read(data, "vertical")
+    writer = ufal.udpipe.OutputFormat.newOutputFormat("conllu")
+    output = m.predict(sentences, True, True, writer)
     with open("/veld/input/txt/output_test_203_for_udpipe_linear.vert", "w") as f:
         f.write(output)
 
