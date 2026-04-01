@@ -12,4 +12,13 @@ services:
       - ./data/inference/input/model/:/veld/input/model/
       - ./data/inference/output/:/veld/output/
       - ./src/udpipe_2/:/veld/code/
+      - ./data/cache/nv/:/root/.nv/ComputeCache
+      - ./data/cache/hf/:/root/.cache/huggingface/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all        # or count: 1 for a single GPU
+              capabilities: [gpu]
 

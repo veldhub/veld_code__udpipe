@@ -8,7 +8,6 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
 import argparse
 import contextlib
 import email.parser
@@ -29,6 +28,10 @@ import ufal.udpipe
 import wembedding_service.wembeddings.wembeddings as wembeddings
 
 __version__ = "2.1.1-dev"
+
+
+import tensorflow as tf
+print(tf.config.list_physical_devices('GPU'))
 
 
 class TooLongError(Exception):
@@ -431,9 +434,11 @@ if __name__ == "__main__":
     print(m)
     with open("/veld/input/txt/test_203_for_udpipe.vert", "r") as f:
         data = f.read()
-    sentences = m.read(data, "vertical")
-    writer = ufal.udpipe.OutputFormat.newOutputFormat("conllu")
-    output = m.predict(sentences, True, True, writer)
+    for i in range(10):
+        print(f"iteration {i}")
+        sentences = m.read(data, "vertical")
+        writer = ufal.udpipe.OutputFormat.newOutputFormat("conllu")
+        output = m.predict(sentences, True, True, writer)
     with open("/veld/input/txt/output_test_203_for_udpipe_linear.vert", "w") as f:
         f.write(output)
 
