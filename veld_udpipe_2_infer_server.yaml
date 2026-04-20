@@ -3,9 +3,7 @@ x-veld:
 
 services:
   veld_udpipe_2_infer_server:
-    build: 
-      context: .
-      dockerfile: udpipe_2.dockerfile
+    build: .
     command: python -u udpipe2_server.py 8001 --concurrent 1 german german-hdt-ud-2.10-220711 /veld/input/model/udpipe2-ud-2.10-220711/de_hdt-ud-2.10-220711.model/ de_hdt https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_210_models
     # from client: python udpipe2_client.py /veld/input/txt/BAUERNZT_20251204.vert --service http://localhost:8001 --input vertical --tagger yes --parser yes --outfile /veld/output/BAUERNZT_20251204.vert
     ports:
