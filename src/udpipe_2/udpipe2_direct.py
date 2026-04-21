@@ -396,13 +396,15 @@ class UDServer(socketserver.ThreadingTCPServer):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("model", type=str, help="Model to serve")
-    parser.add_argument("variant", type=str, help="Variant to serve")
+    # parser.add_argument("model", type=str, help="Model to serve")
+    # parser.add_argument("variant", type=str, help="Variant to serve")
     parser.add_argument("--batch_size", default=32, type=int, help="Batch size")
     parser.add_argument("--threads", default=0, type=int, help="Threads to use")
     parser.add_argument("--wembedding_preload_models", default=[], nargs="*", type=str, help="WEmbedding models to preload")
     parser.add_argument("--wembedding_server", default=None, type=str, help="Address of an WEmbedding server")
     args = parser.parse_args()
+    args.model = "/veld/input/model/" + os.getenv("model")
+    args.variant = os.getenv("variant")
 
     # Create the WEmbeddings client
     if args.wembedding_server is not None:
@@ -421,11 +423,31 @@ if __name__ == "__main__":
         acknowledgements="https://ufal.mff.cuni.cz/udpipe/2/models#universal_dependencies_210_models",
         server_args=args
     )
-    with open("/veld/input/txt/test_203_for_udpipe.vert", "r") as f:
-        data = f.read()
-    sentences = m.read(data, "vertical")
-    writer = ufal.udpipe.OutputFormat.newOutputFormat("conllu")
-    output = m.predict(sentences, True, True, writer)
-    with open("/veld/input/txt/output_test_203_for_udpipe_linear.vert", "w") as f:
-        f.write(output)
-
+    files_list = []
+    in_file = os.getenv("in_file")
+    if in_file is None:
+        for f in os.listdir("/veld/input/txt/"):
+            files_list.append((f, f))
+    else:
+        out_file = os.getenv("out_file")
+        if out_file is None:
+            files_list.append((in_file, in_file))
+        else:
+            files_list.append((in_file, out_file))
+    print(files_list) 
+            
+    for files in files_list:
+        in_file = files[0]
+        out_file = files[1]
+        print(f"processing: {in_file}")
+        writer = ufal.udpipe.OutputFormat.newOutputFormat("conllu")
+        with open(f"/veld/input/txt/{in_file}", "r") as f:
+            data = f.read()
+            try:
+                sentences = m.read(data, "vertical")
+                output = m.predict(sentences, True, True, writer)
+                with open(f"/veld/output/{out_file}", "w") as f:
+                    f.write(output)
+            except Exception as ex:
+                print(ex)
+        

@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: udpipe_2.dockerfile
-    command: python -u udpipe2_direct.py /veld/input/model/de_hdt-ud-2.10-220711.model/ de_hdt
+    command: python -u udpipe2_direct.py
     volumes:
       - ./data/inference/input/txt/:/veld/input/txt/
       - ./data/inference/input/model/:/veld/input/model/
@@ -14,6 +14,11 @@ services:
       - ./src/udpipe_2/:/veld/code/
       - ./data/cache/nv/:/root/.nv/ComputeCache
       - ./data/cache/hf/:/root/.cache/huggingface/
+    environment:
+      model: "de_hdt-ud-2.10-220711.model"
+      variant: "de_hdt"
+      in_file: null
+      out_file: null
     deploy:
       resources:
         reservations:
